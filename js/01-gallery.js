@@ -8,7 +8,7 @@ const gallery = document.querySelector('.gallery');
 const markup = galleryItems
     .map(galleryItem => 
         `<div class="gallery_item">
-            <a class="gallery_link" href="${galleryItem.original}">
+            <a class="gallery_link" href="javascript:void(0) ${galleryItem.original}">
                 <img class="gallery_image" 
                     src="${galleryItem.preview}"
                     data-source="${galleryItem.original}"
@@ -20,4 +20,22 @@ const markup = galleryItems
 console.log(markup);
 
 gallery.insertAdjacentHTML("afterbegin", markup);
+
+// "javascript:void(0);" prevents redirecting to another page
+
+gallery.addEventListener('click', selectImage);
+
+function selectImage(event){
+    if (event.target.nodeName !== "Image") {
+        return;
+    } else {
+        return "${galleryItem.original}"; // dataset.source ?
+    }
+}
+
+
+
+
+
+
 
