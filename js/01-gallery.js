@@ -11,7 +11,7 @@ const markup = galleryItems
             <a class="gallery__link" href="javascript:void(0);" ${galleryItem.original}">
                 <img class="gallery__image" 
                     src="${galleryItem.preview}"
-                    data-source="${galleryItem.original}"
+                    data-original="${galleryItem.original}"
                     alt="${galleryItem.description}"/>
             </a>
         </div>`)
@@ -23,30 +23,24 @@ gallery.insertAdjacentHTML("afterbegin", markup);
 
 // "javascript:void(0);" prevents redirecting to another page
 
-gallery.addEventListener('click', () => {
-    selectImage()
-    const instance = basicLightbox.create
-        (`<img src="${galleryItem.original}">`)
-    
-instance.show()
-});
-
-gallery.addEventListener('click', closeImage);
+gallery.addEventListener('click', (selectImage));
 
 function selectImage(event){
-    if (event.target.nodeName !== "IMAGE") {
+    if (event.target.nodeName !== "IMG") {
         return;
+    } else {
+            const instance = basicLightbox.create
+        (`<img src="${event.target.dataset.original}">`)
+        instance.show();
+
+        document.addEventListener("keydown", event => {
+            if (event.code === "Escape") {
+                instance.close();
+                document.removeEventListener("click", event);
+            }
+        });
     }
 }
-
-function closeImage() {
-    gallery.addEventListener("keydown", event => {
-        event.code = "Escape"
-        if ("keydown" === event.code) {
-            return;
-        }
-    });
-};
 
 
 
