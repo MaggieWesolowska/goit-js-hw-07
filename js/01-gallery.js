@@ -8,14 +8,14 @@ const gallery = document.querySelector('.gallery');
 const markup = galleryItems
     .map(galleryItem => 
         `<div class="gallery__item">
-            <a class="gallery__link" href="javascript:void(0) ${galleryItem.original}">
+            <a class="gallery__link" href="javascript:void(0);" ${galleryItem.original}">
                 <img class="gallery__image" 
                     src="${galleryItem.preview}"
                     data-source="${galleryItem.original}"
                     alt="${galleryItem.description}"/>
             </a>
         </div>`)
-    .join(" ");
+    .join("");
 
 console.log(markup);
 
@@ -23,14 +23,24 @@ gallery.insertAdjacentHTML("afterbegin", markup);
 
 // "javascript:void(0);" prevents redirecting to another page
 
-gallery.addEventListener('click', selectImage);
+gallery.addEventListener('click', () => {
+    selectImage()
+    const instance = basicLightbox.create
+        (`<img src="${galleryItems.original}">`)
+    
+instance.show()
+});
 
 function selectImage(event){
-    if (event.target.nodeName !== "Image") {
+    if (event.target.nodeName !== "IMAGE") {
         return;
-    } else {
-        return "${galleryItem.original}"; // dataset.source ?
     }
+//     } else {
+//         const instance = basicLightbox.create
+//         (`<img src="${galleryItems.original}">`);
+    
+// instance.show()
+//     }
 }
 
 
