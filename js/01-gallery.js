@@ -36,7 +36,7 @@ function selectImage(event){
         document.addEventListener("keydown", event => {
             if (event.code === "Escape") {
                 instance.close();
-                document.removeEventListener("click", event);
+                document.removeEventListener("keydown", event);
             }
         });
     }
