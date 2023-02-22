@@ -26,22 +26,27 @@ gallery.insertAdjacentHTML("afterbegin", markup);
 gallery.addEventListener('click', () => {
     selectImage()
     const instance = basicLightbox.create
-        (`<img src="${galleryItems.original}">`)
+        (`<img src="${galleryItem.original}">`)
     
 instance.show()
 });
+
+gallery.addEventListener('click', closeImage);
 
 function selectImage(event){
     if (event.target.nodeName !== "IMAGE") {
         return;
     }
-//     } else {
-//         const instance = basicLightbox.create
-//         (`<img src="${galleryItems.original}">`);
-    
-// instance.show()
-//     }
 }
+
+function closeImage() {
+    gallery.addEventListener("keydown", event => {
+        event.code = "Escape"
+        if ("keydown" === event.code) {
+            return;
+        }
+    });
+};
 
 
 
