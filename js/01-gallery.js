@@ -29,22 +29,16 @@ function selectImage(event){
     if (event.target.nodeName !== "IMG") {
         return;
     } else {
-            const instance = basicLightbox.create
-        (`<img src="${event.target.dataset.original}">`)
+        const instance = basicLightbox.create
+        (`<img src="${event.target.dataset.original}">`, {onClose: () => document.removeEventListener("keydown", closeImage)});
+
         instance.show();
 
-        document.addEventListener("keydown", event => {
+        const closeImage = (event) => {
             if (event.code === "Escape") {
                 instance.close();
-                document.removeEventListener("keydown", event);
             }
-        });
+        }
+        document.addEventListener("keydown", closeImage);
     }
 }
-
-
-
-
-
-
-
