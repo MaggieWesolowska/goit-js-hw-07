@@ -8,7 +8,7 @@ const gallery = document.querySelector('.gallery');
 const markup = galleryItems
     .map(galleryItem => 
         `<div class="gallery__item">
-            <a class="gallery__link" href="javascript:void(0);" ${galleryItem.original}">
+            <a class="gallery__link" href="javascript:void(0); ${galleryItem.original}">
                 <img class="gallery__image" 
                     src="${galleryItem.preview}"
                     data-original="${galleryItem.original}"
